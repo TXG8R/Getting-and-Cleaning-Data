@@ -1,0 +1,139 @@
+Data Sources
+-------------
+These data were all obtained from the UC-Irvine Machine Learning Repository Center for Machine Learning and Intelligent Systems Human Activity Recognition Using Smartphones Data Set (http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
+
+These data can be downloaded here:  https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+
+Data Sets
+----------
+'train/X_train.txt': Training set.
+'train/y_train.txt': Training activity label index values. Integer Index to be merged with "Activity Labels"
+
+'test/X_test.txt': Test set.
+'test/y_test.txt': Test activity label index values. Integer Index to be merged with "Activity Labels"
+
+'train/subject_test.txt': Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
+
+'features.txt': List of all features / columns / measurements & values collected
+'activity_labels.txt': Links the class labels with their activity name by way of merge on integer index.  (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING)
+
+
+Variables
+----------
+
+Variable_Name          Data_Type       Expected_Size (row x col)   Purpose/Description
+--------------         ----------      --------------------------  --------------------
+pathWork               character       1 x 1                       Working directory value for when I'm working at my office
+pathHome               character       1 x 1                       Working directory value for when I'm working at my home
+pathLaptop             character       1 x 1                       Working directory value for when I'm working on my laptop
+
+data.xTrain            data.frame      7352 x 561                  Raw data from the x-Train data set
+data.yTrain            data.frame      7352 x 1                    Raw data from the y-Train data set
+data.subjectTrain      data.frame      7352 x 1                    Raw data from the subjectTrain data set
+data.features          data.frame      561 x 2                     Raw data from the features data set
+data.activityType      data.frame      6 x 2                       Raw data from the activity labels data set
+
+data.xTest             data.frame      2947 x 561                  Raw data from the x-Test data set
+data.yTest             data.frame      2947 x 1                    Raw data from the y-Test data set
+data.subjectTest       data.frame      2947 x 1                    Raw data from the subjectTest data set
+
+data.combined.Train    data.frame      7352 x 563                  Combined columnar data from the x-Train, subjectTrain, and activity labels data frames
+data.combined.Test     data.frame      2947 x 563                  Combined columnar data from the x-Test, subjectTest, and activity labels data frames
+data.combined.all      data.frame      10299 x 563                 Combined row data of the data.combined.Train and data.combined.Test data frames
+
+columnNames.combined   character       1 x 563                     All column names from the data.combined.all data frame
+
+validColumnNames       logical         1 x 563                     Logical vector for all column names in columnNames.combined that have ActivityID, SubjectID, mean or std in their name
+
+data.results           data.frame      10299 x 69                  All data from data.combined.all with the validColumnNames logical vector applied to it
+columnNames.results    character       1 x 69                      All column names for the columnNames.results data frame
+
+tidyData.initial       data.frame      10299 x 68                  Same as data.results but with Activity Type (factor) column excluded
+tidyData.final         data.frame      180 x 69                    Mean of all columns, grouped by ActivityID and SubjectID, including Activity Type values
+
+
+Transformations
+----------------
+1) Combine the y, subject, and x data to each other as sets of adjacent columns
+2) Combine the Train row data and Test row data (same number of columns each) by rows into one single data set
+3) Assign a vector of values for ALL of the column names of the newly fully-combined data set
+4) Generate a vector of those columns that have ActivityID, SubjectID, mean or std in their name
+5) Using the validColumnNames vector, generate the data set that contains only the columns of interest
+6) Join the data.results and data.activityType by Activity ID so that meaningful Activity names will be available in the final result set, thus make the data more readable to end users
+7) Store vector of column names for final result data set
+8) Clean up column names to create more readable column headers
+9) Apply more readable column names to the data.results data set
+10) Generate Tidy Data Set
+
+
+Result Set Column Headers
+---------------
+ActivityID
+SubjectID
+timeBodyAccelerometer-mean()-X
+timeBodyAccelerometer-mean()-Y
+timeBodyAccelerometer-mean()-Z
+timeBodyAccelerometer-std()-X
+timeBodyAccelerometer-std()-Y
+timeBodyAccelerometer-std()-Z
+timeGravityAccelerometer-mean()-X
+timeGravityAccelerometer-mean()-Y
+timeGravityAccelerometer-mean()-Z
+timeGravityAccelerometer-std()-X
+timeGravityAccelerometer-std()-Y
+timeGravityAccelerometer-std()-Z
+timeBodyAccelerometerJerk-mean()-X
+timeBodyAccelerometerJerk-mean()-Y
+timeBodyAccelerometerJerk-mean()-Z
+timeBodyAccelerometerJerk-std()-X
+timeBodyAccelerometerJerk-std()-Y
+timeBodyAccelerometerJerk-std()-Z
+timeBodyGyroscope-mean()-X
+timeBodyGyroscope-mean()-Y
+timeBodyGyroscope-mean()-Z
+timeBodyGyroscope-std()-X
+timeBodyGyroscope-std()-Y
+timeBodyGyroscope-std()-Z
+timeBodyGyroscopeJerk-mean()-X
+timeBodyGyroscopeJerk-mean()-Y
+timeBodyGyroscopeJerk-mean()-Z
+timeBodyGyroscopeJerk-std()-X
+timeBodyGyroscopeJerk-std()-Y
+timeBodyGyroscopeJerk-std()-Z
+timeBodyAccelerometerMagnitude-mean()
+timeBodyAccelerometerMagnitude-std()
+timeGravityAccelerometerMagnitude-mean()
+timeGravityAccelerometerMagnitude-std()
+timeBodyAccelerometerJerkMagnitude-mean()
+timeBodyAccelerometerJerkMagnitude-std()
+timeBodyGyroscopeMagnitude-mean()
+timeBodyGyroscopeMagnitude-std()
+timeBodyGyroscopeJerkMagnitude-mean()
+timeBodyGyroscopeJerkMagnitude-std()
+frequencyBodyAccelerometer-mean()-X
+frequencyBodyAccelerometer-mean()-Y
+frequencyBodyAccelerometer-mean()-Z
+frequencyBodyAccelerometer-std()-X
+frequencyBodyAccelerometer-std()-Y
+frequencyBodyAccelerometer-std()-Z
+frequencyBodyAccelerometerJerk-mean()-X
+frequencyBodyAccelerometerJerk-mean()-Y
+frequencyBodyAccelerometerJerk-mean()-Z
+frequencyBodyAccelerometerJerk-std()-X
+frequencyBodyAccelerometerJerk-std()-Y
+frequencyBodyAccelerometerJerk-std()-Z
+frequencyBodyGyroscope-mean()-X
+frequencyBodyGyroscope-mean()-Y
+frequencyBodyGyroscope-mean()-Z
+frequencyBodyGyroscope-std()-X
+frequencyBodyGyroscope-std()-Y
+frequencyBodyGyroscope-std()-Z
+frequencyBodyAccelerometerMagnitude-mean()
+frequencyBodyAccelerometerMagnitude-std()
+frequencyBodyAccelerometerJerkMagnitude-mean()
+frequencyBodyAccelerometerJerkMagnitude-std()
+frequencyBodyGyroscopeMagnitude-mean()
+frequencyBodyGyroscopeMagnitude-std()
+frequencyBodyGyroscopeJerkMagnitude-mean()
+frequencyBodyGyroscopeJerkMagnitude-std()
+ActivityType
